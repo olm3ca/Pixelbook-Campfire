@@ -70,10 +70,10 @@ You will need to create USB flash drives: a Windows 10 install USB, a Linux Mint
 
 My grub entry looks like this - yours may be different depending on where your NTFS partition is for the Chrome OS image: 
 
-`img_part=/dev/mmcblk0p5`
-	`img_path=/chromos.img`
-	`search --no-floppy --set=root --file $img_path`
-	`loopback loop $img_path`
+`img_part=/dev/mmcblk0p5`<br>
+	`img_path=/chromos.img`<br>
+	`search --no-floppy --set=root --file $img_path`<br>
+	`loopback loop $img_path`<br>
 	`linux (loop,7)/kernel-chromebook boot=local noresume noswap loglevel=7 disablevmx=off \
 		cros_secure cros_debug loop.max_part=16 img_part=$img_part img_path=$img_path \
 		console= vt.global_cursor_default=0 brunch_bootsplash=default options=native_chromebook_image`
