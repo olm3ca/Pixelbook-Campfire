@@ -14,7 +14,7 @@ Here's what's working on both operating systems:
 | Bluetooth          | Working              | Working                                                           |
 | Suspend            | Working              | Working                                                           |
 | Touchpad           | Working              | Working (on Windows tap-to-click is broken, but it works.)        |
-| Graphics Accel.    | Working              |                                                                   |
+| Tablet Mode	     | Working (partially)  | On-screen keyboard in ChromeOS must be enabled manually for now.  |
 | Sound              | Working              | See notes below on how to enable                                  |
 | Keyboard backlight | Working              |                                                                   |
 | Touchscreen        | Working              |                                                                   |
@@ -82,6 +82,10 @@ img_part=/dev/mmcblk0p5
 		
 
 10. Reboot into Windows, install Grup2Win and add your grub config as Custom Code. Reboot and boot into Chrome OS to set it up. You're done!
+
+11. Lingering problems still being ironed out:
+	- In ChromeOS, tablet mode on screen keyboard works,but must be enabled manually, this is a known issue. When a fix has been identified, I'll update this.
+	- ChromeOS sometimes requests re-login, or it may get stuck at Play Store permissions. A simple reboot fixes this.
 
 
 
