@@ -64,7 +64,7 @@ You will need to create USB flash drives: a Windows 10 install USB, a Linux Mint
 8. Boot into Linux Mint, connect to wifi and run the multi-install.sh script. Note the partition name you formatted to NTFS for the ChromeOS image. In may case it was `/dev/mmcblk0p5` so I entered `mmcblk0p5` at the prompt. Note: at the end of the script you will see an error. This is expected as the script is for PCs, and we are on a Chromebook, so the grub installer will fail, but you can move on to step 9.
 
 9. For grub to work properly, copy the text the script provides. You only need the part that starts from img_part. Make sure there is no } in the end. We need to customize the grub entry with the following:
-	- Replace "/kernel" in the grub configuration with "//kernel-chromebook"
+	- Replace "/kernel" in the grub configuration with "/kernel-chromebook"
 	- add "options=native_chromebook_image" to the kernel command line.
 
 My grub entry looks like this - yours may be different depending on where your NTFS partition is for the Chrome OS image: 
