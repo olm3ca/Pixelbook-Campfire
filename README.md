@@ -14,7 +14,7 @@ Here's what's working on both operating systems:
 | Bluetooth          | Working              | Working                                                           |
 | Suspend            | Working              | Working                                                           |
 | Touchpad           | Working              | Working (on Windows tap-to-click is broken, but it works.)        |
-| Tablet Mode	     | Working (partially)  | On-screen keyboard in ChromeOS must be enabled manually for now.  |
+| Tablet Mode	     | Working 		    | Working							        |
 | Sound              | Working              | See notes below on how to enable                                  |
 | Keyboard backlight | Working              |                                                                   |
 | Touchscreen        | Working              |                                                                   |
@@ -50,7 +50,7 @@ You will need to create USB flash drives: a Windows 10 install USB, a Linux Mint
 
 4. In Disk Management, shrink the Windows 10 volume. Create a new NTFS partition with at least 30GB space. 
 
-5. For now, instead of Brunch stable, download this version of [Brunch Unstable](https://www.dropbox.com/s/hkylzlfyrnheh0l/brunch_r87_unstable_20210123.7z?dl=0) with a few customizations. This is in order to use the 4.4 kernel that will allow audio to work properly. If you use Brunch stable it will install kernel 5.4 and you will have no sound. 
+5. For now, instead of Brunch stable, download the latest version of [Brunch Unstable](https://github.com/sebanc/brunch-unstable/releases) with a few customizations. This is in order to use the 4.4 kernel that will allow audio to work properly. If you use Brunch stable it will install kernel 5.4 and you will have no sound. 
 
 6. Read this tutorial on [GetDroidTips](https://www.getdroidtips.com/install-chrome-os/) This is the method we will use, with a few customizations.  
 	- Customization 1: No need for 60GB or 100GB partitions are described in the guide. See step 4 above - 30GB is plenty, but any additional disk space you allocate is entirely up to you.
@@ -64,7 +64,7 @@ You will need to create USB flash drives: a Windows 10 install USB, a Linux Mint
 8. Boot into Linux Mint, connect to wifi and run the multi-install.sh script. Note the partition name you formatted to NTFS for the ChromeOS image. In may case it was `/dev/mmcblk0p5` so I entered `mmcblk0p5` at the prompt. Note: at the end of the script you will see an error. This is expected as the script is for PCs, and we are on a Chromebook, so the grub installer will fail, but you can move on to step 9.
 
 9. For grub to work properly, copy the text the script provides. You only need the part that starts from img_part. Make sure there is no } in the end. We need to customize the grub entry with the following:
-	- Replace "/kernel" in the grub configuration with "/kernel-test"
+	- Replace "/kernel" in the grub configuration with "/kernel-chromebook"
 	- add "options=native_chromebook_image" to the kernel command line.
 
 My grub entry looks like this - yours may be different depending on where your NTFS partition is for the Chrome OS image: 
@@ -74,7 +74,7 @@ img_part=/dev/mmcblk0p5
 	img_path=/chromos.img
 	search --no-floppy --set=root --file $img_path
 	loopback loop $img_path
-	linux (loop,7)/kernel-test boot=local noresume noswap loglevel=7 disablevmx=off \
+	linux (loop,7)/kernel-chromebook boot=local noresume noswap loglevel=7 disablevmx=off \
 		cros_secure cros_debug loop.max_part=16 img_part=$img_part img_path=$img_path \
 		console= vt.global_cursor_default=0 brunch_bootsplash=default options=native_chromebook_image
 	initrd (loop,7)/lib/firmware/amd-ucode.img (loop,7)/lib/firmware/intel-ucode.img (loop,7)/initramfs.img
@@ -82,10 +82,6 @@ img_part=/dev/mmcblk0p5
 		
 
 10. Reboot into Windows, install Grup2Win and add your grub config as Custom Code. Reboot and boot into Chrome OS to set it up. You're done!
-
-11. Lingering problems still being ironed out:
-	- In ChromeOS, tablet mode on screen keyboard works,but must be enabled manually, this is a known issue. When a fix has been identified, I'll update this.
-	- ChromeOS sometimes requests re-login, or it may get stuck at Play Store permissions. A simple reboot fixes this.
 
 
 
