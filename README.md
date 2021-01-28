@@ -10,12 +10,12 @@ Here's what's working on both operating systems:
 
 | Feature            | Status               | Notes                                                             |
 |--------------------|----------------------|-------------------------------------------------------------------|
-| WiFi               | Working              | Working                                                           |
-| Bluetooth          | Working              | Working                                                           |
-| Suspend            | Working              | Working                                                           |
+| WiFi               | Working              | 	                                                                |
+| Bluetooth          | Working              | 	                                                                |
+| Suspend            | Working              | 	                                                                |
 | Touchpad           | Working              | Working (on Windows tap-to-click is broken, but it works.)        |
-| Tablet Mode	     | Working 		    | Working							        |
-| Sound              | Working              | See notes below on how to enable                                  |
+| Tablet Mode	     | Working 		    | 								        |
+| Sound              | Working              | See notes below - only works on kernel 4.4                        |
 | Keyboard backlight | Working              |                                                                   |
 | Touchscreen        | Working              |                                                                   |
 | OS Updates         | Partially            | Windows 100%. Chrome OS, manual updates are required w/ Brunch.   |
