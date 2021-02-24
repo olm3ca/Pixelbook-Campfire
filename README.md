@@ -46,25 +46,25 @@ You will need to create USB flash drives: a Windows 10 install USB, a Linux Mint
 
 1. Flash UEFI firmware. Read and follow [yusefnapora's excellent guide](https://github.com/yusefnapora/pixelbook-linux) on how to flash the UEFI firmware using MrChromebox's scripts. To do this, you will need to disable write protect with either the SuzyQable cable or by removing the battery. Stop at the section before [installing Ubuntu](https://github.com/yusefnapora/pixelbook-linux#installing-stock-ubuntu). 
 
-3. Install Windows 10. All drivers for the hardware will be installed using Windows Updates, no need for 3rd party tools.
+2. Install Windows 10. All drivers for the hardware will be installed using Windows Updates, no need for 3rd party tools.
 
-4. In Disk Management, shrink the Windows 10 volume. Create a new NTFS partition with at least 30GB space. 
+3. In Disk Management, shrink the Windows 10 volume. Create a new NTFS partition with at least 30GB space. 
 
-5. For now, instead of Brunch stable, download the latest version of [Brunch Unstable](https://github.com/sebanc/brunch-unstable/releases) with a few customizations. This is in order to use the 4.4 kernel that will allow audio to work properly. If you use Brunch stable it will install kernel 5.4 and you will have no sound.
+4. For now, instead of Brunch stable, download the latest version of [Brunch Unstable](https://github.com/sebanc/brunch-unstable/releases) with a few customizations. This is in order to use the 4.4 kernel that will allow audio to work properly. If you use Brunch stable it will install kernel 5.4 and you will have no sound.
 	- Note: even though Brunch unstable lists a newer kernel, we can use the 4.4 kernel by following step 8 below.
 
-6. Read this tutorial on [GetDroidTips](https://www.getdroidtips.com/install-chrome-os/) This is the method we will use, with a few customizations.  
+5. Read this tutorial on [GetDroidTips](https://www.getdroidtips.com/install-chrome-os/) This is the method we will use, with a few customizations.  
 	- Customization 1: No need for 60GB or 100GB partitions are described in the guide. See step 4 above - 30GB is plenty, but any additional disk space you allocate is entirely up to you.
-	- Customization 2: Use Brunch Unstable, see step 5.
+	- Customization 2: Use Brunch Unstable, see step 4.
 	- For this guide, we are using the Recovery image from ChromeOS 87 - download from [Cros Updates](https://cros-updates-serving.appspot.com) and scroll down to eve, then download version 87. Or, using this [direct link](https://dl.google.com/dl/edgedl/chromeos/recovery/chromeos_13505.111.0_eve_recovery_stable-channel_mp-v2.bin.zip).
 
-7. At this point, you should have the following ready:
+6. At this point, you should have the following ready:
 	- A bootable USB drive with Linux Mint ready to go
 	- All of the files as described in the GetDroidTips tutorial in a ChromeOS folder on your Windows drive somewhere. 
 
-8. Boot into Linux Mint, connect to wifi and run the multi-install.sh script. Note the partition name you formatted to NTFS for the ChromeOS image. In may case it was `/dev/mmcblk0p5` so I entered `mmcblk0p5` at the prompt. Note: at the end of the script you will see an error. This is expected as the script is for PCs, and we are on a Chromebook, so the grub installer will fail, but you can move on to step 9.
+7. Boot into Linux Mint, connect to wifi and run the multi-install.sh script. Note the partition name you formatted to NTFS for the ChromeOS image. In may case it was `/dev/mmcblk0p5` so I entered `mmcblk0p5` at the prompt. Note: at the end of the script you will see an error. This is expected as the script is for PCs, and we are on a Chromebook, so the grub installer will fail, but you can move on to step 9.
 
-9. For grub to work properly, copy the text the script provides. You only need the part that starts from img_part. Make sure there is no } in the end. We need to customize the grub entry with the following:
+8. For grub to work properly, copy the text the script provides. You only need the part that starts from img_part. Make sure there is no } in the end. We need to customize the grub entry with the following:
 	- Replace "/kernel" in the grub configuration with "/kernel-chromebook"
 	- add "options=native_chromebook_image" to the kernel command line.
 
