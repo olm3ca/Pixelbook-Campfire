@@ -50,11 +50,12 @@ You will need to create USB flash drives: a Windows 10 install USB, a Linux Mint
 
 4. In Disk Management, shrink the Windows 10 volume. Create a new NTFS partition with at least 30GB space. 
 
-5. For now, instead of Brunch stable, download the latest version of [Brunch Unstable](https://github.com/sebanc/brunch-unstable/releases) with a few customizations. This is in order to use the 4.4 kernel that will allow audio to work properly. If you use Brunch stable it will install kernel 5.4 and you will have no sound. 
+5. For now, instead of Brunch stable, download the latest version of [Brunch Unstable](https://github.com/sebanc/brunch-unstable/releases) with a few customizations. This is in order to use the 4.4 kernel that will allow audio to work properly. If you use Brunch stable it will install kernel 5.4 and you will have no sound.
+	- Note: even though Brunch unstable lists a newer kernel, we can use the 4.4 kernel by following step 8 below.
 
 6. Read this tutorial on [GetDroidTips](https://www.getdroidtips.com/install-chrome-os/) This is the method we will use, with a few customizations.  
 	- Customization 1: No need for 60GB or 100GB partitions are described in the guide. See step 4 above - 30GB is plenty, but any additional disk space you allocate is entirely up to you.
-	- Customization 2: Use Brunch Unstable, see step 4.
+	- Customization 2: Use Brunch Unstable, see step 5.
 	- For this guide, we are using the Recovery image from ChromeOS 87 - download from [Cros Updates](https://cros-updates-serving.appspot.com) and scroll down to eve, then download version 87. Or, using this [direct link](https://dl.google.com/dl/edgedl/chromeos/recovery/chromeos_13505.111.0_eve_recovery_stable-channel_mp-v2.bin.zip).
 
 7. At this point, you should have the following ready:
