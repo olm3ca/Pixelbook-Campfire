@@ -18,7 +18,7 @@ Here's what's working on both operating systems:
 | Sound              | Working              | See notes below - only works on kernel 4.4                        |
 | Keyboard backlight | Working              |                                                                   |
 | Touchscreen        | Working              |                                                                   |
-| OS Updates         | Partially            | Windows 100%. Chrome OS, manual updates are required w/ Brunch.   |
+| OS Updates         | Working	            | Yes - on Chrome OS, see notes below.  			        |
 
 
 ### Requirements
@@ -50,7 +50,7 @@ You will need to create USB flash drives: a Windows 10 install USB, a Linux Mint
 
 3. In Disk Management, shrink the Windows 10 volume. Create a new NTFS partition with at least 30GB space. 
 
-4. For now, instead of Brunch stable, download the latest version of [Brunch Unstable](https://github.com/sebanc/brunch-unstable/releases) with a few customizations. This is in order to use the 4.4 kernel that will allow audio to work properly. If you use Brunch stable it will install kernel 5.4 and you will have no sound.
+4. Instead of Brunch stable, we will download the latest version of [Brunch Unstable](https://github.com/sebanc/brunch-unstable/releases) with a few customizations. This is in order to use the 4.4 kernel that will allow audio to work properly. If you use Brunch stable it will install kernel 5.4 and you will have no sound.
 	- Note: even though Brunch unstable lists a newer kernel, we can use the 4.4 kernel by following step 8 below.
 
 5. Read this tutorial on [GetDroidTips](https://www.getdroidtips.com/install-chrome-os/) This is the method we will use, with a few customizations.  
@@ -66,9 +66,9 @@ You will need to create USB flash drives: a Windows 10 install USB, a Linux Mint
 
 8. For grub to work properly, copy the text the script provides. You only need the part that starts from img_part. Make sure there is no } in the end. We need to customize the grub entry with the following:
 	- Replace "/kernel" in the grub configuration with "/kernel-chromebook"
-	- add "options=native_chromebook_image" to the kernel command line.
+	- add "options=enable_updates,native_chromebook_image" to the kernel command line.
 
-My grub entry looks like this - yours may be different depending on where your NTFS partition is for the Chrome OS image: 
+What this does is it tells Brunch to boot Chrome OS with the 4.4 kernel, and it also enables regular OS updates just like a normal install. My grub entry looks like this - yours may be different depending on where your NTFS partition is for the Chrome OS image: 
 
 ```
 img_part=/dev/mmcblk0p5
@@ -76,8 +76,8 @@ img_part=/dev/mmcblk0p5
 	search --no-floppy --set=root --file $img_path
 	loopback loop $img_path
 	linux (loop,7)/kernel-chromebook boot=local noresume noswap loglevel=7 disablevmx=off \
-		cros_secure cros_debug loop.max_part=16 img_part=$img_part img_path=$img_path \
-		console= vt.global_cursor_default=0 brunch_bootsplash=default options=native_chromebook_image
+		cros_secure cros_debug options=enable_updates,native_chromebook_image loop.max_part=16 img_part=$img_part img_path=$img_path \
+		console= vt.global_cursor_default=0 brunch_bootsplash=default 
 	initrd (loop,7)/lib/firmware/amd-ucode.img (loop,7)/lib/firmware/intel-ucode.img (loop,7)/initramfs.img
 ```
 		
