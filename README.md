@@ -82,7 +82,9 @@ img_part=/dev/mmcblk0p5
 ```
 		
 
-10. Reboot into Windows, install Grup2Win and add your grub config as Custom Code. Reboot and boot into Chrome OS to set it up. You're done!
+10. Reboot into Windows, install Grup2Win and add your grub config as Custom Code. Reboot and boot into Chrome OS to set it up. 
+
+11. In Windows, make sure to disable fast startup or you will encounter problems from time to time booting into Chrome OS (you may see the bright screen with "We are repairing this device, please wait" but after several reboots, it still won't boot.) This procedure is explained in many places, here is [one tutorial](https://help.uaudio.com/hc/en-us/articles/213195423-How-To-Disable-Fast-Startup-in-Windows-10) to follow.. 
 
 
 
