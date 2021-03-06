@@ -68,6 +68,8 @@ You will need to create USB flash drives: a Windows 10 install USB, a Linux Mint
 	- Replace "/kernel" in the grub configuration with "/kernel-chromebook"
 	- add "options=enable_updates,native_chromebook_image" to the kernel command line.
 
+Optionally, copy the grub config added to this repo and use it in grub2win, just make sure to update the partition number if needed.
+
 What this does is it tells Brunch to boot Chrome OS with the 4.4 kernel, and it also enables regular OS updates just like a normal install. My grub entry looks like this - yours may be different depending on where your NTFS partition is for the Chrome OS image: 
 
 ```
