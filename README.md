@@ -62,7 +62,7 @@ You will need to create USB flash drives: a Windows 10 install USB, a Linux Mint
 	- A bootable USB drive with Linux Mint ready to go
 	- All of the files as described in the GetDroidTips tutorial in a ChromeOS folder on your Windows drive somewhere. 
 
-7. Boot into Linux Mint, connect to wifi and run the multi-install.sh script. Note the partition name you formatted to NTFS for the ChromeOS image. In may case it was `/dev/mmcblk0p5` so I entered `mmcblk0p5` at the prompt. Note: at the end of the script you will see an error. This is expected as the script is for PCs, and we are on a Chromebook, so the grub installer will fail, but you can move on to step 9.
+7. Boot into Linux Mint, connect to wifi and run the multi-install.sh script. Note the partition name you formatted to NTFS for the ChromeOS image. In may case it was `/dev/mmcblk0p5` so I entered `mmcblk0p5` at the prompt. Note: at the end of the script you will see an error. This is expected as the script is for PCs, and we are on a Chromebook, so the grub installer will fail, but you can move on to the next step.
 
 8. For grub to work properly, copy the text the script provides. You only need the part that starts from img_part. Make sure there is no } in the end. We need to customize the grub entry with the following:
 	- Replace "/kernel" in the grub configuration with "/kernel-chromebook"
@@ -84,9 +84,9 @@ img_part=/dev/mmcblk0p5
 ```
 		
 
-10. Reboot into Windows, install Grup2Win and add your grub config as Custom Code. Reboot and boot into Chrome OS to set it up. 
+9. Reboot into Windows, install [Grub2Win](https://sourceforge.net/projects/grub2win/) and add your grub config as Custom Code. Reboot and boot into Chrome OS to set it up. 
 
-11. In Windows, make sure to disable fast startup or you will encounter problems from time to time booting into Chrome OS (you may see the bright screen with "We are repairing this device, please wait" but after several reboots, it still won't boot.) This procedure is explained in many places, here is [one tutorial](https://help.uaudio.com/hc/en-us/articles/213195423-How-To-Disable-Fast-Startup-in-Windows-10) to follow.. 
+10. In Windows, make sure to disable fast startup or you will encounter problems from time to time booting into Chrome OS (you may see the bright screen with "We are repairing this device, please wait" but after several reboots, it still won't boot.) This procedure is explained in many places, here is [one tutorial](https://help.uaudio.com/hc/en-us/articles/213195423-How-To-Disable-Fast-Startup-in-Windows-10) to follow.. 
 
 
 
