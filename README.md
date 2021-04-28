@@ -72,6 +72,8 @@ Optionally, copy the grub config added to this repo and use it in grub2win, just
 
 What this does is it tells Brunch to boot Chrome OS with the 4.4 kernel, and it also enables regular OS updates just like a normal install. My grub entry looks like this - yours may be different depending on where your NTFS partition is for the Chrome OS image: 
 
+Grub2Win Config:
+
 ```
 img_part=/dev/mmcblk0p5
 	img_path=/chromos.img
@@ -82,7 +84,20 @@ img_part=/dev/mmcblk0p5
 		console= vt.global_cursor_default=0 brunch_bootsplash=default 
 	initrd (loop,7)/lib/firmware/amd-ucode.img (loop,7)/lib/firmware/intel-ucode.img (loop,7)/initramfs.img
 ```
-		
+
+Grub config (for Linux users, this would go in 40_Custom:
+```
+menuentry "ChromeOS" {
+	img_part=/dev/mmcblk0p5
+	img_path=/chromos.img
+	search --no-floppy --set=root --file $img_path
+	loopback loop $img_path
+	linux (loop,7)/kernel-chromebook boot=local noresume noswap loglevel=7 disablevmx=off \
+		cros_secure cros_debug options=native_chromebook_image,enable_updates loop.max_part=16 img_part=$img_part img_path=$img_path \
+		console= vt.global_cursor_default=0 brunch_bootsplash=default
+	initrd (loop,7)/lib/firmware/amd-ucode.img (loop,7)/lib/firmware/intel-ucode.img (loop,7)/initramfs.img
+}
+```
 
 9. Reboot into Windows, install [Grub2Win](https://sourceforge.net/projects/grub2win/) and add your grub config as Custom Code. Reboot and boot into Chrome OS to set it up. 
 
