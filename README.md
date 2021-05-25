@@ -58,7 +58,7 @@ You will need to create USB flash drives: a Windows 10 install USB, a Linux Mint
 	- A bootable USB drive with Linux Mint ready to go
 	- All of the files as described in the Brunch github. 
 
-7. Boot into Linux Mint, connect to wifi and run the chromeos-install.sh script. Note the partition name you formatted for the ChromeOS image. In may case it was `/dev/mmcblk0p5` so I entered `mmcblk0p5` at the prompt. Note: 512GB NVMe drives will have a differnt partition layout and naming format.
+7. Boot into Linux Mint, connect to wifi and run the chromeos-install.sh script. Note the partition name you formatted for the ChromeOS image. In may case it was `/dev/mmcblk0p5` so I used this in the Brunch install. You run it in one line, specifying where the partition is, the size you want, and the recovery image you'll be using. 
 
 8. For grub to work properly, see below. We need to customize the grub entry with the following:
 	- Replace "/kernel" in the grub configuration with "kernel-chromebook-5.4"
