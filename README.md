@@ -50,27 +50,23 @@ You will need to create USB flash drives: a Windows 10 install USB, a Linux Mint
 
 3. In Disk Management, shrink the Windows 10 volume. Create a new NTFS partition with at least 30GB space. 
 
-4. Instead of Brunch stable, we will download the latest version of [Brunch Unstable](https://github.com/sebanc/brunch-unstable/releases) with a few customizations. This is in order to use the 4.4 kernel that will allow audio to work properly. If you use Brunch stable it will install kernel 5.4 and you will have no sound.
-	- Note: even though Brunch unstable lists a newer kernel, we can use the 4.4 kernel by following step 8 below.
+4. Instead of Brunch stable, we will download the latest version of [Brunch Unstable](https://github.com/sebanc/brunch-unstable/releases) with a few customizations. The Pixelbook can now use 5.4 kernel - see details below.
 
-5. Read this tutorial on [GetDroidTips](https://www.getdroidtips.com/install-chrome-os/) This is the method we will use, with a few customizations.  
-	- Customization 1: No need for 60GB or 100GB partitions are described in the guide. See step 4 above - 30GB is plenty, but any additional disk space you allocate is entirely up to you.
-	- Customization 2: Use Brunch Unstable, see step 4.
-	- For this guide, we are using the Recovery image from ChromeOS 87 - download from [Cros Updates](https://cros-updates-serving.appspot.com) and scroll down to eve, then download version 87. Or, using this [direct link](https://dl.google.com/dl/edgedl/chromeos/recovery/chromeos_13505.111.0_eve_recovery_stable-channel_mp-v2.bin.zip).
+5. Read the official [Brunch github](https://github.com/sebanc/brunch) and understand the process of installing Brunch.
 
 6. At this point, you should have the following ready:
 	- A bootable USB drive with Linux Mint ready to go
-	- All of the files as described in the GetDroidTips tutorial in a ChromeOS folder on your Windows drive somewhere. 
+	- All of the files as described in the Brunch github. 
 
-7. Boot into Linux Mint, connect to wifi and run the multi-install.sh script. Note the partition name you formatted to NTFS for the ChromeOS image. In may case it was `/dev/mmcblk0p5` so I entered `mmcblk0p5` at the prompt. Note: at the end of the script you will see an error. This is expected as the script is for PCs, and we are on a Chromebook, so the grub installer will fail, but you can move on to the next step.
+7. Boot into Linux Mint, connect to wifi and run the chromeos-install.sh script. Note the partition name you formatted for the ChromeOS image. In may case it was `/dev/mmcblk0p5` so I entered `mmcblk0p5` at the prompt. Note: 512GB NVMe drives will have a differnt partition layout and naming format.
 
-8. For grub to work properly, copy the text the script provides. You only need the part that starts from img_part. Make sure there is no } in the end. We need to customize the grub entry with the following:
-	- Replace "/kernel" in the grub configuration with "/kernel-chromebook"
+8. For grub to work properly, see below. We need to customize the grub entry with the following:
+	- Replace "/kernel" in the grub configuration with "kernel-chromebook-5.4"
 	- add "options=enable_updates,native_chromebook_image" to the kernel command line.
 
 Optionally, copy the grub config added to this repo and use it in grub2win, just make sure to update the partition number if needed.
 
-What this does is it tells Brunch to boot Chrome OS with the 4.4 kernel, and it also enables regular OS updates just like a normal install. My grub entry looks like this - yours may be different depending on where your NTFS partition is for the Chrome OS image: 
+What this does is it tells Brunch to boot Chrome OS with the 5.4 kernel, and it also enables regular OS updates just like a normal install. My grub entry looks like this - yours may be different depending on where your NTFS partition is for the Chrome OS image: 
 
 Grub2Win Config:
 
@@ -79,7 +75,7 @@ img_part=/dev/mmcblk0p5
 	img_path=/chromos.img
 	search --no-floppy --set=root --file $img_path
 	loopback loop $img_path
-	linux (loop,7)/kernel-chromebook boot=local noresume noswap loglevel=7 disablevmx=off \
+	linux (loop,7)/kernel-chromebook-5.4 boot=local noresume noswap loglevel=7 disablevmx=off \
 		cros_secure cros_debug options=enable_updates,native_chromebook_image loop.max_part=16 img_part=$img_part img_path=$img_path \
 		console= vt.global_cursor_default=0 brunch_bootsplash=default 
 	initrd (loop,7)/lib/firmware/amd-ucode.img (loop,7)/lib/firmware/intel-ucode.img (loop,7)/initramfs.img
@@ -92,7 +88,7 @@ menuentry "ChromeOS" {
 	img_path=/chromos.img
 	search --no-floppy --set=root --file $img_path
 	loopback loop $img_path
-	linux (loop,7)/kernel-chromebook boot=local noresume noswap loglevel=7 disablevmx=off \
+	linux (loop,7)/kernel-chromebook-5.4 boot=local noresume noswap loglevel=7 disablevmx=off \
 		cros_secure cros_debug options=native_chromebook_image,enable_updates loop.max_part=16 img_part=$img_part img_path=$img_path \
 		console= vt.global_cursor_default=0 brunch_bootsplash=default
 	initrd (loop,7)/lib/firmware/amd-ucode.img (loop,7)/lib/firmware/intel-ucode.img (loop,7)/initramfs.img
@@ -102,6 +98,7 @@ menuentry "ChromeOS" {
 9. Reboot into Windows, install [Grub2Win](https://sourceforge.net/projects/grub2win/) and add your grub config as Custom Code. Reboot and boot into Chrome OS to set it up. 
 
 10. In Windows, make sure to disable fast startup or you will encounter problems from time to time booting into Chrome OS (you may see the bright screen with "We are repairing this device, please wait" but after several reboots, it still won't boot.) This procedure is explained in many places, here is [one tutorial](https://help.uaudio.com/hc/en-us/articles/213195423-How-To-Disable-Fast-Startup-in-Windows-10) to follow.. 
+11. Back in Brunch, make sure to open crosh shell and issue this command to stop touchpad firmware updates from getting in the way: `sudo rm -r /opt/google/touch/scripts/*`
 
 
 
