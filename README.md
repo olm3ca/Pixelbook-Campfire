@@ -15,10 +15,10 @@ Here's what's working on both operating systems:
 | Suspend            | Working              | 	                                                                |
 | Touchpad           | Working              | Working (on Windows tap-to-click is broken, but it works.)        |
 | Tablet Mode	     | Working 		    | 								        |
-| Sound              | Working              | See notes below - only works on kernel 4.4                        |
+| Sound              | Working              |                         |
 | Keyboard backlight | Working              |                                                                   |
 | Touchscreen        | Working              |                                                                   |
-| OS Updates         | Working	            | Yes - on Chrome OS, see notes below.  			        |
+| OS Updates         | Working	            |  			        |
 
 
 ### Requirements
